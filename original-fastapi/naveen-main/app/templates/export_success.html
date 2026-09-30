@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Export Complete • ComicCraft
+{% endblock %}
+
+
+{% block content %}
+
+<section class="success card">
+
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+
+    <p class="eyebrow">
+        EXPORT COMPLETE
+    </p>
+
+
+    <h1>
+        Your comic PDF is ready.
+    </h1>
+
+
+    {% if filename %}
+
+    <p>
+        {{ filename }}
+    </p>
+
+    {% endif %}
+
+
+    <div class="actions">
+
+
+        <a
+            class="button primary"
+            href="/"
+        >
+
+            Go Create Another Comic
+
+        </a>
+
+
+        {% if filename %}
+
+        <a
+            class="button secondary"
+            href="/download/{{ filename }}"
+        >
+
+            Download Again
+
+        </a>
+
+        {% endif %}
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}

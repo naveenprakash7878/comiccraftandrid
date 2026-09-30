@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Comic Preview • ComicCraft
+{% endblock %}
+
+
+{% block content %}
+
+<section class="result-header">
+
+    <p class="eyebrow">
+        YOUR COMIC IS READY
+    </p>
+
+
+    <h1>
+        {{ comic.title }}
+    </h1>
+
+
+    <p>
+
+        <strong>
+            {{ comic.character_name }}
+        </strong>
+
+        • {{ comic.setting }}
+
+        • {{ comic.tone|title }}
+
+        • {{ comic.art_style|title }}
+
+    </p>
+
+
+    <div class="actions">
+
+
+        {% if comic.pdf_url %}
+
+        <a
+            class="button primary"
+            href="{{ comic.pdf_url|replace('/static/exports/', '/download/') }}"
+        >
+
+            Download Your Comic as PDF
+
+        </a>
+
+
+        <a
+            class="button secondary"
+            href="/export-success?filename={{ comic.pdf_url.split('/')[-1] }}"
+        >
+
+            Export Success Page
+
+        </a>
+
+        {% endif %}
+
+
+        <a
+            class="button secondary"
+            href="/"
+        >
+
+            Create Another Comic
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<div class="panels">
+
+
+{% for panel in comic.panels %}
+
+
+<article class="panel card">
+
+
+    <div class="panel-title">
+
+        <span>
+            Panel {{ panel.panel_number }}
+        </span>
+
+        <h2>
+            {{ panel.title }}
+        </h2>
+
+    </div>
+
+
+    <img
+        src="{{ panel.image_url }}"
+        alt="Comic panel {{ panel.panel_number }}"
+    >
+
+
+    <p class="scene">
+
+        <em>
+            {{ panel.scene_description }}
+        </em>
+
+    </p>
+
+
+    {% if panel.caption %}
+
+    <p>
+
+        <strong>
+            Caption:
+        </strong>
+
+        {{ panel.caption }}
+
+    </p>
+
+    {% endif %}
+
+
+    {% if panel.narration %}
+
+    <p>
+
+        <strong>
+            Narration:
+        </strong>
+
+        {{ panel.narration }}
+
+    </p>
+
+    {% endif %}
+
+
+    {% if panel.dialogue %}
+
+    <p class="dialogue">
+
+        <strong>
+            Dialogue:
+        </strong>
+
+        “{{ panel.dialogue }}”
+
+    </p>
+
+    {% endif %}
+
+
+    <details>
+
+        <summary>
+            Image Prompt Reference
+        </summary>
+
+        <p class="prompt-reference">
+            {{ panel.image_prompt }}
+        </p>
+
+    </details>
+
+
+</article>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Comic • ComicCraft
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <p class="eyebrow">
+        CREATE YOUR STORY
+    </p>
+
+    <h1>
+        Turn one idea into
+        a five-panel comic.
+    </h1>
+
+    <p class="hero-copy">
+
+        Describe your story, choose a
+        character, setting, tone and
+        art style.
+
+        ComicCraft builds the outline,
+        narration, illustrations and PDF.
+
+    </p>
+
+</section>
+
+
+{% if error %}
+
+<div class="alert error">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+
+<form
+    class="card form-card"
+    method="post"
+    action="/generate"
+>
+
+
+    <label>
+
+        Story Prompt
+
+        <textarea
+            name="story_prompt"
+            rows="5"
+            maxlength="2000"
+            required
+            placeholder="A brave fox discovers a hidden doorway in an enchanted forest..."
+        >{{ form.story_prompt if form else "" }}</textarea>
+
+    </label>
+
+
+    <div class="grid two">
+
+
+        <label>
+
+            Main Character Name
+
+            <input
+                type="text"
+                name="character_name"
+                maxlength="80"
+                required
+                placeholder="Arin"
+                value="{{ form.character_name if form else '' }}"
+            >
+
+        </label>
+
+
+        <label>
+
+            Setting
+
+            <input
+                type="text"
+                name="setting"
+                maxlength="120"
+                required
+                placeholder="Enchanted forest"
+                value="{{ form.setting if form else '' }}"
+            >
+
+        </label>
+
+
+    </div>
+
+
+    <div class="grid two">
+
+
+        <label>
+
+            Story Tone
+
+            <select name="tone">
+
+                <option value="light-hearted">
+                    Light-hearted
+                </option>
+
+                <option value="dramatic">
+                    Dramatic
+                </option>
+
+                <option value="poetic">
+                    Poetic
+                </option>
+
+                <option value="funny">
+                    Funny
+                </option>
+
+            </select>
+
+        </label>
+
+
+        <label>
+
+            Art Style
+
+            <select name="art_style">
+
+                <option value="anime">
+                    Anime
+                </option>
+
+                <option value="pixel art">
+                    Pixel Art
+                </option>
+
+                <option value="comic book">
+                    Comic Book
+                </option>
+
+                <option value="realistic">
+                    Realistic
+                </option>
+
+            </select>
+
+        </label>
+
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="button primary"
+    >
+
+        Generate My Comic
+
+    </button>
+
+
+    <p class="hint">
+
+        AI generation may take several minutes
+        because five illustrations are generated.
+
+    </p>
+
+
+</form>
+
+{% endblock %}
